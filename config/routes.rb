@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :cart_products
   resources :carts
+  root to: "pages#index"
   get 'pages/index'
   get 'pages/ovoce'
   get 'pages/zelenina'
