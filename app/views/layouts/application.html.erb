@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<section id="head">
+  <div id="menu">
+    <nav>
+      <a class="menu-button" href="index.html">REGISTROVAT</a> <a
+    class="menu-button" href="looking-for.html">PRIHLASIT</a> <a
+    class="menu-button" href="sitter.html">MUJ UCET</a>
+    </nav>
+  </div>
 
-<%= yield %>
-
+</section>
+<section id="content">
+  <%= yield %>
+</section>
 </body>
 </html>

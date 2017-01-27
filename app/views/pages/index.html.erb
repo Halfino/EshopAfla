@@ -1,2 +1,25 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<ul>
+  <li><a class="active" href="index">Home</a></li>
+  <li><a href="/pages/index">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+<div id="text">
+  <p id="notice"><%= notice %></p>
+  <table>
+    <tbody>
+      <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.number %></td>
+        <td><%= product.package%></td>
+        <td><%= product.minimum_order %></td>
+        <td><%= product.price%></td>
+        <td><%= product.customer_price%></td>
+        <td><%= button_to 'Vlozit do kosiku', cart_products_path(product_id: product)%></td>
+      </tr>
+        <% end %>
+    </tbody>
+
+  </table>
+</div>
