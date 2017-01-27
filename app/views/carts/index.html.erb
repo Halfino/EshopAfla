@@ -1,5 +1,6 @@
-<p id="notice"><%= notice %></p>
 
+<div id="text">
+  <p id="notice"><%= notice %></p>
 <h1>Listing Carts</h1>
 
 <table>
@@ -12,6 +13,7 @@
   <tbody>
     <% @carts.each do |cart| %>
       <tr>
+        <td><%= cart.cart_products%></td>
         <td><%= link_to 'Show', cart %></td>
         <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
         <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,3 +25,4 @@
 <br>
 
 <%= link_to 'New Cart', new_cart_path %>
+</div>

@@ -31,7 +31,7 @@ class CartProductsController < ApplicationController
 
     respond_to do |format|
       if @cart_product.save
-        format.html { redirect_to pages_index_path, notice: 'Zbozi bylo vlozeno do kosiku' }
+        format.html { redirect_to carts_path, notice: 'Zbozi bylo vlozeno do kosiku' }
         format.json { render :show, status: :created, location: @cart_product }
       else
         format.html { render :new }

@@ -1,4 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+<div id="text">
+  <h2>Obsah kosiku</h2>
+  <table>
+    <thead>
+    <tr>
+      <td>Nazev zbozi</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @cart.cart_products.each do |item| %>
+        <tr>
+          <td>
+            <%= item.product.name %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Edit', edit_cart_path(@cart) %> |
+  <%= link_to 'Back', carts_path %>
+
+</div>
