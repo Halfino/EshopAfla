@@ -15,6 +15,7 @@
       <td>Minimalni objednavka </td>
       <td>Cena</td>
       <td>Zamestnanecka cena</td>
+      <td>Mnozstvi</td>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +27,14 @@
         <td><%= product.minimum_order %> baleni</td>
         <td><%= product.price%></td>
         <td><%= product.customer_price%></td>
-        <td><%= button_to 'Vlozit do kosiku', cart_products_path(product_id: product)%></td>
+        <td>
+          <%= form_tag cart_products_path, :method => :post do%>
+              <%= hidden_field_tag 'product_id', product.id%>
+              <%= number_field_tag 'pocet', 1, min: 1 , max: 99, step: 1%>
+        </td>
+        <td>
+              <%= submit_tag 'Vlozit do kosiku'%></td>
+          <%end%>
       </tr>
         <% end %>
     </tbody>

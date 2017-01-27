@@ -27,7 +27,8 @@ class CartProductsController < ApplicationController
   # POST /cart_products.json
   def create
     product = Product.find(params[:product_id])
-    @cart_product = @cart.add_product(product.id)
+    quantity = params[:pocet]
+    @cart_product = @cart.add_product(product.id, quantity)
 
     respond_to do |format|
       if @cart_product.save
@@ -72,6 +73,6 @@ class CartProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_product_params
-      params.require(:cart_product).permit(:product)
+      params.require(:cart_product).permit(:product, :pocet)
     end
 end
