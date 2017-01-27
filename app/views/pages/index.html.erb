@@ -7,13 +7,23 @@
 <div id="text">
   <p id="notice"><%= notice %></p>
   <table>
+    <thead>
+    <tr>
+      <td>Nazev zbozi</td>
+      <td>Katalogove cislo</td>
+      <td>Baleni</td>
+      <td>Minimalni objednavka </td>
+      <td>Cena</td>
+      <td>Zamestnanecka cena</td>
+    </tr>
+    </thead>
     <tbody>
       <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
         <td><%= product.number %></td>
         <td><%= product.package%></td>
-        <td><%= product.minimum_order %></td>
+        <td><%= product.minimum_order %> baleni</td>
         <td><%= product.price%></td>
         <td><%= product.customer_price%></td>
         <td><%= button_to 'Vlozit do kosiku', cart_products_path(product_id: product)%></td>
