@@ -10,9 +10,15 @@
 <section id="head">
   <div id="menu">
     <nav>
-      <a class="menu-button" href="/pages/index">REGISTROVAT</a> <a
-    class="menu-button" href="looking-for.html">PRIHLASIT</a> <a
-    class="menu-button" href="sitter.html">MUJ UCET</a>
+      <a class="menu-button" <%= link_to 'REGISTROVAT', new_user_registration_path%>
+      <% if user_signed_in? %>
+        <a class="menu-button" <%= link_to 'ODHLASIT', destroy_user_session_path, method: :delete%>
+      <% else %>
+        <a class="menu-button" <%= link_to 'PRIHLASIT', new_user_session_path %>
+      <%end%>
+      <% if user_signed_in? %>
+      <a class="menu-button" href="sitter.html">MUJ UCET</a>
+          <% end%>
     </nav>
   </div>
 
@@ -26,7 +32,12 @@
       <li><a <%=link_to name.name , adress%></a></li>
     <%end%>
   </ul>
+
+
   <%= yield %>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 </section>
 </body>
 </html>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :cart_products
   resources :carts
   root to: "pages#index"
