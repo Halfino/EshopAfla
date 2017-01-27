@@ -1,43 +1,13 @@
-<ul>
-  <li><a class="active" href="index">Home</a></li>
-  <li><a href="/pages/index">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-</ul>
++<!--TODO implement devise User with name, complany, email, password-->
++<!--TODO implement create order with timestamps, also create table with expedition time-->
++<!--TODO implement top menu to users-->
++<!--TODO implement user has one active cart-->
++<!--TODO implement product image thumb and big image after click on it-->
++<!--TODO fix a little the layout-->
++<!--TODO connect this with alimpex DB-->
 <div id="text">
-  <p id="notice"><%= notice %></p>
-  <table>
-    <thead>
-    <tr>
-      <td>Nazev zbozi</td>
-      <td>Katalogove cislo</td>
-      <td>Baleni</td>
-      <td>Minimalni objednavka </td>
-      <td>Cena</td>
-      <td>Zamestnanecka cena</td>
-      <td>Mnozstvi</td>
-    </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.number %></td>
-        <td><%= product.package%></td>
-        <td><%= product.minimum_order %> baleni</td>
-        <td><%= product.price%></td>
-        <td><%= product.customer_price%></td>
-        <td>
-          <%= form_tag cart_products_path, :method => :post do%>
-              <%= hidden_field_tag 'product_id', product.id%>
-              <%= number_field_tag 'pocet', 1, min: 1 , max: 99, step: 1%>
-        </td>
-        <td>
-              <%= submit_tag 'Vlozit do kosiku'%></td>
-          <%end%>
-      </tr>
-        <% end %>
-    </tbody>
-
-  </table>
+  <h1> Zakaznicky eshop firmy Alimpex</h1>
+  <p>Funguje kosik a generovani postranniho menu podle kategorii. Zatim nereseno jak bude fungovat generace pohledu,
+  vzhledem k tomu, ze jsem zatim neresil JS, vytvarim pohled pro kazdou kategorii zvlast, coz je sice zdlouhave, ale ani
+  nevim, jestli to jde udelat lepe..pravdepodobne proifovat. Uvidim az dodelam appku, jak pujde tuning</p>
 </div>

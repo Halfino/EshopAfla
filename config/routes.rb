@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :cart_products
   resources :carts
   get 'pages/index'
+  get 'pages/ovoce'
+  get 'pages/zelenina'
+  get 'pages/napoje'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

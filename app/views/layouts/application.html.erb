@@ -18,11 +18,14 @@
 
 </section>
 <section id="content">
+  <%@categories = Category.all%>
   <ul>
     <li><a class="active" href="/pages/index">Home</a></li>
-    <li><a href="/pages/index">News</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#about">About</a></li>
+    <% @categories.each do |name| %>
+      <% adress = "/pages/#{name.name}".downcase!%>
+      <li><a <%=link_to name.name , adress%></a></li>
+    <%end%>
+
   </ul>
   <%= yield %>
 </section>
