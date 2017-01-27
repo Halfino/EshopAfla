@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<% if notice %>
-    <p id="notice"><%= notice %></p>
-<% end %>
 <div id="text">
+  <% if notice %>
+      <p id="notice"><%= notice %></p>
+  <% end %>
   <h2>Obsah kosiku</h2>
   <table>
     <thead>
     <tr>
       <td>Nazev zbozi</td>
+      <td>Pocet</td>
     </tr>
     </thead>
     <tbody>
@@ -16,12 +15,14 @@
         <tr>
           <td>
             <%= item.product.name %>
+            <%= item.quantity%>
           </td>
         </tr>
     <% end %>
     </tbody>
   </table>
-  <%= link_to 'Edit', edit_cart_path(@cart) %> |
-  <%= link_to 'Back', carts_path %>
-
+  <%= button_to 'Vyparzdnit kosik', @cart, method: :delete, data: {confirm: 'Chcete vyprazdnit kosik?'} %>
+  <a <%= link_to 'Zpet', pages_index_path %>
 </div>
+
+

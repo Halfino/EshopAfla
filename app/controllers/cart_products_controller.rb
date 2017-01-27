@@ -27,11 +27,11 @@ class CartProductsController < ApplicationController
   # POST /cart_products.json
   def create
     product = Product.find(params[:product_id])
-    @cart_product = @cart.cart_products.build(product: product)
+    @cart_product = @cart.add_product(product.id)
 
     respond_to do |format|
       if @cart_product.save
-        format.html { redirect_to carts_path, notice: 'Zbozi bylo vlozeno do kosiku' }
+        format.html { redirect_to @cart, notice: 'Zbozi bylo vlozeno do kosiku' }
         format.json { render :show, status: :created, location: @cart_product }
       else
         format.html { render :new }
@@ -72,6 +72,6 @@ class CartProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_product_params
-      params.require(:cart_product).permit(:product, :cart_id)
+      params.require(:cart_product).permit(:product)
     end
 end
