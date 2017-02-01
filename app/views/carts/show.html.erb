@@ -13,10 +13,8 @@
     <tbody>
     <% @cart.cart_products.each do |item| %>
         <tr>
-          <td>
-            <%= item.product.name %>
-            <%= item.quantity%>
-          </td>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity%></td>
         </tr>
     <% end %>
     </tbody>

@@ -1,6 +1,7 @@
 class CartProductsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  #before_action :set_cart, only: [:create]
+  before_action :set_cart_final, only: [:create]
   before_action :set_cart_product, only: [:show, :edit, :update, :destroy]
 
   # GET /cart_products
@@ -25,13 +26,20 @@ class CartProductsController < ApplicationController
 
   # POST /cart_products
   # POST /cart_products.json
+  # add product to cart and assign cart to user if user logegd in. If there is cart already belongs to user
+  # this cart is used instead of creating a new one
   def create
     product = Product.find(params[:product_id])
     quantity = params[:pocet]
     @cart_product = @cart.add_product(product.id, quantity)
-
+    :add_cart_to_current_user
     respond_to do |format|
       if @cart_product.save
+        if user_signed_in?
+          user = current_user
+          user.cart_id = @cart.id
+          user.save
+        end
         format.html { redirect_to @cart, notice: 'Zbozi bylo vlozeno do kosiku' }
         format.json { render :show, status: :created, location: @cart_product }
       else
@@ -74,5 +82,46 @@ class CartProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_product_params
       params.require(:cart_product).permit(:product, :pocet)
+    end
+
+    # add cart_id to users table if user logged in
+    def add_cart_to_current_user(cart_id)
+      if user_signed_in
+        user = current_user
+        user.cart_id = cart_id
+        user.save
+      end
+    end
+
+    # set cart method.
+    # if there is signed in user and cart in DB which belongs to that user, this cart is selected for adding product
+    # to cart. In the other ways new cart is created.
+    def set_cart_final
+      if user_signed_in?
+        user = current_user
+        if user.cart_id != nil
+          # logged user get cart which is in db belongs to this user.
+          begin
+            @cart = Cart.find(user.cart_id)
+            session[:cart_id] = user.cart_id
+          # if the cart desn't exists, new cart is created
+          rescue ActiveRecord::RecordNotFound
+            begin
+              @cart = Cart.find(session[:cart_id])
+            rescue ActiveRecord::RecordNotFound
+              @cart = Cart.create
+              session[:cart_id] = @cart.id
+            end
+          end
+        end
+      else
+        # if user signed out, find session cart, rescuing to create new if session cart isnt find
+        begin
+          @cart = Cart.find(session[:cart_id])
+        rescue ActiveRecord::RecordNotFound
+          @cart = Cart.create
+          session[:cart_id] = @cart.id
+        end
+      end
     end
 end

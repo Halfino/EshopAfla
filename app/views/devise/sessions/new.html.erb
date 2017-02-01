@@ -18,6 +18,10 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
+  <% if session[:cart_id] != nil%>
+    <input type="hidden" name="cart_id" value="<%=session[:cart_id]%>"/>
+
+  <%end%>
 
   <div class="actions">
     <%= f.submit "Log in" %>
